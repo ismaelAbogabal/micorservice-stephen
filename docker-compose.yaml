@@ -1,0 +1,61 @@
+version: "3.7"
+name: myapp
+services:
+  myapp_posts:
+    image: node:20-alpine
+    container_name: myapp_posts
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./post:/app
+    ports:
+      - "4000:4000"
+  myapp_comments:
+    image: node:20-alpine
+    container_name: myapp_comments
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./comment:/app
+    ports:
+      - "4001:4001"
+  myapp_querys:
+    image: node:20-alpine
+    container_name: myapp_querys
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./querys:/app
+    ports:
+      - "4002:4002"
+  myapp_moderations:
+    image: node:20-alpine
+    container_name: myapp_moderations
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./moderations:/app
+    environment:
+      PORT: 4003
+    ports:
+      - "4003:4003"
+  myapp_events:
+    image: node:20-alpine
+    container_name: myapp_events
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./events:/app
+    ports:
+      - "4999:4999"
+  client:
+    image: node:20-alpine
+    container_name: myapp_client
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./client:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_POSTS_URL=http://myapp_posts:4000

@@ -1,0 +1,11 @@
+### Get Comments of post 
+get http://localhost:4001/posts/e03a5d75/comments
+
+
+### Create a comment on a post
+post http://localhost:4001/posts/e03a5d75/comments
+Content-Type: application/json
+
+{
+    "content": "This is a comment"
+}
